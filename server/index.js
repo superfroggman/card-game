@@ -9,6 +9,11 @@ app.use(express.static(clientDir));
 
 io.on("connection", async (socket) => {
   console.log("New Connection to SocketIO");
+  io.sockets.emit("msg", "Hello");
+
+  socket.on("msg", async function (msg) {
+    console.log(msg);
+  });
 });
 
 server.listen(port, () => console.log(`Server listening on port ${port}!`));
